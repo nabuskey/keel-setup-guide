@@ -7,8 +7,7 @@ spec:
   replicas: 1
   template:
     spec:
-      serviceAccount: spinnaker-service-account-front50
-      serviceAccountName: spinnaker-service-account-front50
+      serviceAccountName: spinnaker-keel-demo-front50
       securityContext:
         fsGroup: 100
       

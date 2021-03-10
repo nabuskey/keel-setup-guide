@@ -2,7 +2,7 @@ providers:
   aws:
     enabled: true
     accounts:
-    - name: test-1
+    - name: demo-1
       requiredGroupMembership: []
       providerVersion: V1
       permissions: {}
@@ -12,7 +12,7 @@ providers:
       assumeRole: role/spinnakerManaged
       lifecycleHooks: []
       permissions: {}
-    primaryAccount: test-1
+    primaryAccount: demo-1
     bakeryDefaults:
       baseImages: []
     defaultKeyPairTemplate: '{{name}}-keypair'
@@ -41,13 +41,10 @@ providers:
   kubernetes:
     enabled: true
     accounts:
-    - name: deploy-keel-dev
+    - name: deploy-keel-demo
       permissions: {}
       kubeconfigFile: /var/kubeconfig/kubeconfig-deploy
-    - name: deploy-keel-prod
-      permissions: {}
-      kubeconfigFile: /var/kubeconfig/kubeconfig-deploy
-    primaryAccount: deploy-staging
+    primaryAccount: deploy-keel-demo
 deploymentEnvironment:
   size: SMALL
   type: Distributed
@@ -84,7 +81,7 @@ persistentStorage:
     enabled: false
   s3:
     enabled: true
-    bucket: test-spinnaker-keel
+    bucket: spinnaker-keel-demo
     rootFolder: front50
     accessKeyId: <ID>
     secretAccessKey: <SECRET> 
@@ -100,44 +97,6 @@ persistentStorage:
       user: keel
       password: mysecretpassword
 security: {}
-  # apiSecurity:
-  #   ssl:
-  #     enabled: false
-  #   overrideBaseUrl: https://example.com
-  # uiSecurity:
-  #   ssl:
-  #     enabled: false
-  #   overrideBaseUrl: https://example.com
-  # authn:
-  #   enabled: true
-  #   oauth2:
-  #     enabled: true
-  #     provider: GITHUB
-  #     client:
-  #       accessTokenUri: https://github.com/login/oauth/access_token
-  #       userAuthorizationUri: https://github.com/login/oauth/authorize
-  #       clientId: <CLIENT_ID>
-  #       clientSecret: <SECRET>
-  #       scope: user:email
-  #     resource:
-  #       userInfoUri: https://api.github.com/user
-  #     userInfoMapping:
-  #       email: email
-  #       firstName: ""
-  #       lastName: name
-  #       username: login
-  #     userInfoRequirements: {}
-  # authz:
-  #   enabled: true
-  #   groupMembership:
-  #     service: GITHUB
-  #     file:
-  #       roleProviderType: FILE
-  #     github:
-  #       baseUrl: https://api.github.com
-  #       roleProviderType: GITHUB
-  #       accessToken: <TOKEN>
-  #       organization: testOrg
 artifacts:
   github:
     enabled: true

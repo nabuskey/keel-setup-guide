@@ -3,13 +3,9 @@ kind: Kustomization
 resources:
 - ../../base
 - ../../../kustomization-base/keel
-# - serviceaccount.yml
 patchesStrategicMerge:
-# - patch-deck.yml
-# - patch-gate.yml
 - patch-clouddriver.yml
-# - patch-front50.yml
-# - patch-keel.yml
+- patch-front50.yml
 images:
 - name: us-docker.pkg.dev/spinnaker-community/docker/clouddriver:spinnaker-master-latest-unvalidated
   newTag: spinnaker-1.24.4
@@ -34,7 +30,7 @@ images:
 - name: us-docker.pkg.dev/spinnaker-community/docker/keel:spinnaker-master-latest-unvalidated
   newName: docker.io/nabuskey/keel
   newTag: "0.178.0"
-namespace: keel
+namespace: spinnaker
 secretGenerator:
 - behavior: merge
   files:
@@ -59,7 +55,7 @@ secretGenerator:
 - behavior: merge
   files:
   - spinnaker.yml
-  - local/igor-local.yml
+  - secrets/igor-local.yml
   name: igor-config
 - behavior: merge
   files:
@@ -68,7 +64,7 @@ secretGenerator:
 - behavior: merge
   files:
   - spinnaker.yml
-  - local/keel-local.yml
+  - secrets/keel-local.yml
   name: keel-config
 - behavior: merge
   files:
@@ -81,6 +77,3 @@ secretGenerator:
 - name: kubeconfig-deploy
   files:
   - secrets/kubeconfig-deploy
-- name: aws-managing
-  files:
-  - secrets/credentials
