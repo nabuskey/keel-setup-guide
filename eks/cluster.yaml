@@ -21,12 +21,3 @@ iam:
     tags:
       Application: "Front50"
       Service: "Spinnaker"
-  - metadata: # This service account is used by clouddriver to manage AWS resources such as Security Groups.
-      name: clouddriver-service-account
-      namespace: spinnaker
-    attachPolicyARNs:
-    - "arn:aws:iam::aws:policy/PowerUserAccess"
-    roleName: "spinnaker-clouddriver-service-account"
-    tags:
-      Application: "Clouddriver"
-      Service: "Spinnaker"

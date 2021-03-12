@@ -1,17 +1,7 @@
 providers:
   aws:
-    enabled: true
-    accounts:
-    - name: demo-1
-      requiredGroupMembership: []
-      providerVersion: V1
-      permissions: {}
-      accountId: '123'
-      regions:
-      - name: us-west-2
-      assumeRole: role/spinnakerManaged
-      lifecycleHooks: []
-      permissions: {}
+    enabled: false
+    accounts: []
     primaryAccount: demo-1
     bakeryDefaults:
       baseImages: []
@@ -22,87 +12,45 @@ providers:
       iamRole: BaseIAMRole
   dockerRegistry:
     enabled: true
-    accounts:
-    - name: public-docker-account
-      requiredGroupMembership: []
-      permissions: {}
-      address: https://index.docker.io
-      email: fake.email@spinnaker.io
+    accounts: 
+    - address: https://index.docker.io
       cacheIntervalSeconds: 30
-      clientTimeoutMillis: 60000
       cacheThreads: 1
+      clientTimeoutMillis: 60000
+      email: fake.email@spinnaker.io
+      insecureRegistry: false
+      name: deploy-keel-registry
       paginateSize: 100
+      permissions: {}
+      repositories:
+      - <REPO_NAME>
       sortTagsByDate: false
       trackDigests: false
-      insecureRegistry: false
-      repositories:
-      - nabuskey/public-test
     primaryAccount: public-docker-account
   kubernetes:
     enabled: true
     accounts:
-    - name: deploy-keel-demo
-      permissions: {}
-      kubeconfigFile: /var/kubeconfig/kubeconfig-deploy
-    primaryAccount: deploy-keel-demo
-deploymentEnvironment:
-  size: SMALL
-  type: Distributed
-  accountName: deploy-staging
-  imageVariant: SLIM
-  updateVersions: true
-  consul:
-    enabled: false
-  vault:
-    enabled: false
-  customSizing: {}
-  sidecars: {}
-  initContainers: {}
-  hostAliases: {}
-  affinity: {}
-  tolerations: {}
-  nodeSelectors: {}
-  gitConfig:
-    upstreamUser: spinnaker
-  livenessProbeConfig:
-    enabled: false
-  haServices:
-    clouddriver:
-      enabled: false
-      disableClouddriverRoDeck: false
-    echo:
-      enabled: false
+      - kubeconfigFile: /var/kubeconfig/kubeconfig-deploy
+        name: deploy-keel
 timezone: America/Los_Angeles
 persistentStorage:
   persistentStoreType: s3
-  redis:
-    host: redis
-    port: 6379
-    enabled: false
   s3:
     enabled: true
-    bucket: spinnaker-keel-demo
+    bucket: spinnaker-keel-guide
     rootFolder: front50
-    accessKeyId: <ID>
-    secretAccessKey: <SECRET> 
     region: us-west-2
-  sql:
-    enabled: true
-    default:
-      jdbcUrl: jdbc:mysql://mysql/keel?useSSL=false
-      user: keel
-      password: mysecretpassword
-    migration:
-      jdbcUrl: jdbc:mysql://mysql/keel?useSSL=false
-      user: keel
-      password: mysecretpassword
-security: {}
+security: 
+  apiSecurity:
+    overrideBaseUrl: http://example.com
+  uiSecurity:
+    overrideBaseUrl: http:///example.com
 artifacts:
   github:
     enabled: true
     accounts:
-    - name: test-git
-      token: <TOKEN>
+    - name: github-artifact
+      token: <TOEKN>
 managedDelivery:
   enabled: true
   keel:
@@ -110,7 +58,7 @@ managedDelivery:
       ec2:
         enabled: true
       k8s:
-        enabled: false
+        enabled: true
       deliveryConfig:
         enabled: true
 features:

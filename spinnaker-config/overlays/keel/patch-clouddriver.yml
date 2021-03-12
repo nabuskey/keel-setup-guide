@@ -6,7 +6,6 @@ metadata:
 spec:
   template:
     spec:
-      serviceAccountName: spinnaker-keel-demo-clouddriver
       volumes:
       - name: kubeconfig-volume
         secret:
@@ -16,4 +15,11 @@ spec:
         volumeMounts:
         - mountPath: /var/kubeconfig
           name: kubeconfig-volume
-          
+        resources:
+            limits: 
+              cpu: "500m"
+            requests:
+              cpu: "400m"
+      serviceAccountName: clouddriver-service-account
+      securityContext:
+        fsGroup: 100

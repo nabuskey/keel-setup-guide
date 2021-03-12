@@ -6,6 +6,8 @@ resources:
 patchesStrategicMerge:
 - patch-clouddriver.yml
 - patch-front50.yml
+- patch-deck.yml
+- patch-gate.yml
 images:
 - name: us-docker.pkg.dev/spinnaker-community/docker/clouddriver:spinnaker-master-latest-unvalidated
   newTag: spinnaker-1.24.4
@@ -28,8 +30,7 @@ images:
 - name: us-docker.pkg.dev/spinnaker-community/docker/kayenta:spinnaker-master-latest-unvalidated
   newTag: spinnaker-1.24.4
 - name: us-docker.pkg.dev/spinnaker-community/docker/keel:spinnaker-master-latest-unvalidated
-  newName: docker.io/nabuskey/keel
-  newTag: "0.178.0"
+  newTag: 0.1.0-20210310200021
 namespace: spinnaker
 secretGenerator:
 - behavior: merge

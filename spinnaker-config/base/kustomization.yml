@@ -64,5 +64,4 @@ commonLabels:
   app.kubernetes.io/component: server
   app.kubernetes.io/managed-by: kleat
   app.kubernetes.io/part-of: spinnaker
-  app.kubernetes.io/version: 1.20.2
 namespace: spinnaker
